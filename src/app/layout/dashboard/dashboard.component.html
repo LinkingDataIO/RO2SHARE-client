@@ -1,0 +1,19 @@
+<h2 class="text-muted">SHARE Search Results for your name</h2>
+<hr>
+<div class="row">
+    <div class="col-10" *ngFor="let result of shareResults">
+        <div class="card mb-3">
+            <div  class="card-header card-default">
+                {{result._source.title}}
+                <a class="btn btn-sm btn-info" (click)="claim(result)">Claim <span class="fa fa-plus-circle"></span></a>
+            </div>
+            <div  class="card-block">
+              <small class="text-muted">{{result._source.type}}</small>
+              <p *ngIf="result._source.publishers?.length > 0">Publisher: {{result._source.publishers}}</p>
+              <p [hidden]="!result._source.contributors?.length > 0">Contributors: <span *ngFor="let contributor of result._source.contributors">{{contributor}}, </span></p>
+              <p [hidden]="!result._source.description">Description: {{result._source.description}}</p>
+              <p *ngFor="let link of result._source.identifiers"><a target="_blank" href="{{link}}">{{link}}</a></p>
+            </div>
+        </div> 
+    </div>
+</div>
