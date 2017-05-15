@@ -1,25 +1,32 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card mb-3">
-            <div class="card-header">Modal</div>
-            <!-- Large modal -->
-            <div class="card-block">
-                <button class="btn btn-primary" (click)="open(content)">Large modal</button>
-                <ng-template #content let-c="close" let-d="dismiss">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modal title</h4>
-                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>One fine body&hellip;</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-                    </div>
-                </ng-template>
-            </div>
+            <button class="btn btn-primary" (click)="open(content)">Create a new DiSCO</button>
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">New DiSCO</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form role="form">
+                <fieldset class="form-group">
+                    <label>DiSCO Name</label>
+                    <input class="form-control" placeholder="Enter name">
+                </fieldset>
+                    <fieldset class="form-group">
+                        <label>Select your ROs</label>
+                        <select multiple="multiple" class="form-control" #roSelection>
+                            <option *ngFor="let ro of ros">{{ro.title}}</option>
+                        </select>
+                    </fieldset>
+                </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+                <button type="button" class="btn btn-secondary" (click)="d(roSelection.value)">Save</button>
+                </div>
+            </ng-template>
         </div>
     </div>
-</div>
