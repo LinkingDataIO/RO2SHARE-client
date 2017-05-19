@@ -2,19 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { StorageService } from '../../../../shared/services/storage/storage.service'
 import { ROService} from '../../../../shared/services/ro/ro.service'
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 
 @Component({
     selector: 'app-modal',
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.component.scss'],
     providers: [ROService, StorageService]
-
 })
 export class ModalComponent implements OnInit {
     closeResult: string;
     user: Object;
     public ros: Array<any> = [];
     public discos: Array<any> = [];
+    optionsModel: number[];
     
 
     constructor(private modalService: NgbModal,

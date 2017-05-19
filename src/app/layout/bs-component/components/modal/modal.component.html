@@ -21,6 +21,7 @@
                             <option *ngFor="let ro of ros">{{ro.title}}</option>
                         </select>
                     </fieldset>
+                    <ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>
                 </form>
                 </div>
                 <div class="modal-footer">

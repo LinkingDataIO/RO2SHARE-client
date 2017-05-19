@@ -23,6 +23,7 @@ export function HttpLoaderFactory(http: Http) {
         FormsModule,
         HttpModule,
         AppRoutingModule,
+
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

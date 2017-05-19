@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 // relative import
 import { BsComponentRoutingModule } from './bs-component-routing.module';
@@ -30,6 +31,7 @@ import { PageHeaderModule } from '../../shared';
         NgbModule.forRoot(),
         PageHeaderModule,
         BsComponentRoutingModule,
+        MultiselectDropdownModule,
     ],
     declarations: [
         BsComponentComponent,
