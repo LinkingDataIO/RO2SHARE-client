@@ -2,31 +2,36 @@
     <div class="col-sm-12">
         <div class="card mb-3">
             <button class="btn btn-primary" (click)="open(content)">Create a new DiSCO</button>
+            <hr />
+            <p><ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true" [hidden]="discos?.length > 0 && !searching">Loading DiSCOs</ngb-progressbar></p>
+            <div class="col-10" *ngFor="let disco of discos">
+                <div class="card mb-3">
+                    <div  class="card-header card-default">
+                        {{disco.title}}
+                    </div>
+                    <div  class="card-block">
+                      <small>{{disco.objects}}</small>
+                      <small class="text-muted">{{disco.uri}}</small>
+                    </div>
+                </div> 
+            </div>
             <ng-template #content let-c="close" let-d="dismiss">
                 <div class="modal-header">
                     <h4 class="modal-title">New DiSCO</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form role="form">
                 <fieldset class="form-group">
-                    <label>DiSCO Name</label>
-                    <input class="form-control" placeholder="Enter name">
+                    <label>DiSCO Description</label>
+                    <input class="form-control" [(ngModel)]="disco.description" placeholder="Enter name">
                 </fieldset>
-                    <fieldset class="form-group">
-                        <label>Select your ROs</label>
-                        <select multiple="multiple" class="form-control" #roSelection>
-                            <option *ngFor="let ro of ros">{{ro.title}}</option>
-                        </select>
-                    </fieldset>
-                    <ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>
-                </form>
+                <ss-multiselect-dropdown [options]="myOptions" [settings]="mySettings" [(ngModel)]="disco.ros" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
-                <button type="button" class="btn btn-secondary" (click)="d(roSelection.value)">Save</button>
+                <button type="button" class="btn btn-secondary" (click)="d(disco)">Save</button>
                 </div>
             </ng-template>
         </div>

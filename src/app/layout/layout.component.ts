@@ -7,6 +7,11 @@ import { Router } from '@angular/router';
     styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
+	public options = {
+	    position: ["bottom", "left"],
+	    timeOut: 5000,
+	    lastOnBottom: true
+	}
 
     constructor(public router: Router) { }
 

@@ -5,7 +5,7 @@
         <div class="card mb-3">
             <div  class="card-header card-default">
                 {{result._source.title}}
-                <a class="btn btn-sm btn-info" (click)="claim(result)">Claim <span class="fa fa-plus-circle"></span></a>
+                <button class="btn btn-sm btn-info" (click)="claim(result)">Claim <span class="fa fa-plus-circle"></span></button>
             </div>
             <div  class="card-block">
               <small class="text-muted">{{result._source.type}}</small>

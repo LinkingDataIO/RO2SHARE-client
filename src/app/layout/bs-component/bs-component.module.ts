@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
+
 // relative import
 import { BsComponentRoutingModule } from './bs-component-routing.module';
 import { BsComponentComponent } from './bs-component.component';
@@ -20,6 +21,7 @@ import {
     TabsComponent,
     TooltipComponent,
     TimepickerComponent,
+
 } from './components';
 import { PageHeaderModule } from '../../shared';
 

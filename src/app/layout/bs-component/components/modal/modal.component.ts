@@ -4,36 +4,60 @@ import { StorageService } from '../../../../shared/services/storage/storage.serv
 import { ROService} from '../../../../shared/services/ro/ro.service'
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
+import { IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
+import { DiSCOService } from '../../../../shared/services/disco/disco.service';
 
 @Component({
     selector: 'app-modal',
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.component.scss'],
-    providers: [ROService, StorageService]
+    providers: [ROService, StorageService, DiSCOService]
 })
 export class ModalComponent implements OnInit {
     closeResult: string;
     user: Object;
+    searching: boolean = true;
+    options: Object = {};
     public ros: Array<any> = [];
     public discos: Array<any> = [];
-    optionsModel: number[];
+    public disco: Object = {description: '', ros: []};
+    myOptions: IMultiSelectOption[];
+    mySettings: IMultiSelectSettings = {
+        enableSearch: true,
+        checkedStyle: 'fontawesome',
+        buttonClasses: 'btn btn-block btn-disco',
+    };
     
 
     constructor(private modalService: NgbModal,
                 private roService: ROService,
-                private storageService: StorageService) { }
+                private storageService: StorageService,
+                private discoService: DiSCOService) { }
 
     ngOnInit() {
+        this.myOptions = [];
         this.user = this.storageService.read<Object>('user');
-        this.roService.mine(this.user['orcid']).then(ros => this.ros = ros);
+        this.roService.mine(this.user['orcid']).then(ros => {
+            this.ros = ros;
+            for (let entry of this.ros) {
+                this.myOptions.push({id: entry['uri'], name: entry['title']});
+            }
+        });
+        this.discoService.mine(this.user['orcid']).then(discos => {
+            this.discos = discos;
+            this.searching = false;
+        });
     }
 
     open(content) {
         this.modalService.open(content).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
-            console.log(reason);
-            this.discos.push(reason);
+            this.discoService.create(this.user['orcid'], reason);
+            this.disco = {description: '', ros: []};
+            this.discoService.mine(this.user['orcid']).then(discos => {
+                this.discos = discos;
+            });
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
     }
@@ -47,4 +71,6 @@ export class ModalComponent implements OnInit {
             return  `with: ${reason}`;
         }
     }
+
+    onChange() { }
 }
