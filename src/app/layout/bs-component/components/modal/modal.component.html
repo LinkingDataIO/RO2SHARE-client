@@ -3,7 +3,7 @@
         <div class="card mb-3">
             <button class="btn btn-primary" (click)="open(content)">Create a new DiSCO</button>
             <hr />
-            <p><ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true" [hidden]="discos?.length > 0 && !searching">Loading DiSCOs</ngb-progressbar></p>
+            <p><ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true" [hidden]="discos?.length > 0 || !searching">Loading DiSCOs</ngb-progressbar></p>
             <div class="col-10" *ngFor="let disco of discos">
                 <div class="card mb-3">
                     <div  class="card-header card-default">
