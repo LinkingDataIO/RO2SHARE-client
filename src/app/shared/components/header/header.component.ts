@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
+        localStorage.removeItem('githubRepos');
         localStorage.removeItem('isLoggedin');
         localStorage.removeItem('user');
     }

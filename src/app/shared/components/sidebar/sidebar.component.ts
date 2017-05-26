@@ -19,6 +19,7 @@ export class SidebarComponent {
         }
     }
     onLoggedout() {
+        localStorage.removeItem('githubRepos');
         localStorage.removeItem('isLoggedin');
         localStorage.removeItem('user');
     }

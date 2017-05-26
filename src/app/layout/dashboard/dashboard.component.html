@@ -1,11 +1,13 @@
 <h2>SHARE Search Results for your name</h2>
 <hr>
+<p><ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true" [hidden]="shareResults?.length > 0 || !searching">Loading SHARE search results</ngb-progressbar></p>
 <div class="row">
     <div class="col-10" *ngFor="let result of shareResults">
         <div class="card mb-3">
             <div  class="card-header card-default">
                 {{result._source.title}}
-                <button class="btn btn-sm btn-info" (click)="claim(result)">Claim <span class="fa fa-plus-circle"></span></button>
+                <button class="btn btn-sm btn-primary" (click)="claim(result)" [hidden]="result.claimed">Claim <span class="fa fa-plus-circle"></span></button>
+                <a class="btn btn-sm btn-success" [hidden]="!result.claimed">Claimed <span class="fa fa-flag"></span></a>
             </div>
             <div  class="card-block">
               <small class="text-muted">{{result._source.type}}</small>

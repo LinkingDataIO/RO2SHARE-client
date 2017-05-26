@@ -14,6 +14,7 @@ import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr'
 export class DashboardComponent implements OnInit {
     public shareResults: Array<any> = [];
     public user: Object;
+    public searching: boolean = true;
 
 
     constructor(private shareService: SHAREService,
@@ -28,13 +29,16 @@ export class DashboardComponent implements OnInit {
         this.user = this.storageService.read<Object>('user');
         this.shareService.getResults(this.user['orcid']).then(shareResults => {
             this.shareResults = shareResults;
+            this.searching = false;
         });
     }
 
     claim(researchObject: Object){
         let claimResult = false;
+        researchObject['type'] = 'work';
         this.roService.claim(this.user['orcid'], researchObject).then(claimResult => {
             this.toastr.success('Creative Work Claimed!', 'Success!', {toastLife: 3000, showCloseButton: false});
+            researchObject['claimed'] = true;
         });
     }
 }

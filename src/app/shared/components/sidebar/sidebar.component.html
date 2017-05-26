@@ -1,8 +1,23 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
     <ul class="list-group">
-        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-compass"></i>&nbsp;SHARE Search
-        </a>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('pages')">
+                <span><i class="fa fa-compass"></i>&nbsp;Search</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)" class="list-group-item" routerLink="/dashboard" [routerLinkActive]="['router-link-active']"><span><img src="/assets/images/nav_logo_share.png" style="height: 10px;">&nbsp;SHARE</span></a>
+                    </li>
+                    <li>
+                        <a routerLink="/github" [routerLinkActive]="['router-link-active']" class="list-group-item"><span><i class="fa fa-github"></i>&nbsp;GitHub</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" class="list-group-item"><span><i class="fa fa-slideshare"></i>&nbsp;Slideshare</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
         <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-cube"></i>&nbsp;My Research Objects
         </a>

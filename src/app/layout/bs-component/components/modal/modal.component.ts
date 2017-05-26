@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, ViewContainerRef } from '@angular/core'
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap'
 import { StorageService } from '../../../../shared/services/storage/storage.service'
 import { ROService} from '../../../../shared/services/ro/ro.service'
-import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
-import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
-import { IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
-import { DiSCOService } from '../../../../shared/services/disco/disco.service';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect'
+import { IMultiSelectOption } from 'angular-2-dropdown-multiselect'
+import { IMultiSelectSettings } from 'angular-2-dropdown-multiselect'
+import { DiSCOService } from '../../../../shared/services/disco/disco.service'
+import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr'
 
 @Component({
     selector: 'app-modal',
@@ -21,6 +22,7 @@ export class ModalComponent implements OnInit {
     public ros: Array<any> = [];
     public discos: Array<any> = [];
     public disco: Object = {description: '', ros: []};
+    public downloadUrl: string = "http://localhost:8080/disco/download?uri="
     myOptions: IMultiSelectOption[];
     mySettings: IMultiSelectSettings = {
         enableSearch: true,
@@ -32,7 +34,11 @@ export class ModalComponent implements OnInit {
     constructor(private modalService: NgbModal,
                 private roService: ROService,
                 private storageService: StorageService,
-                private discoService: DiSCOService) { }
+                private discoService: DiSCOService,
+                public toastr: ToastsManager, 
+                private vcr: ViewContainerRef) {
+        this.toastr.setRootViewContainerRef(vcr);
+    }
 
     ngOnInit() {
         this.myOptions = [];
@@ -53,12 +59,14 @@ export class ModalComponent implements OnInit {
         this.modalService.open(content).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
-            this.discoService.create(this.user['orcid'], reason);
-            this.disco = {description: '', ros: []};
-            this.discoService.mine(this.user['orcid']).then(discos => {
-                this.discos = discos;
+            this.discoService.create(this.user['orcid'], reason).then(create => {
+                this.disco = {description: '', ros: []};
+                this.discoService.mine(this.user['orcid']).then(discos => {
+                    this.discos = discos;
+                    this.toastr.success('Disco created!', 'Success!', {toastLife: 3000, showCloseButton: false});
+                });
+                this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
             });
-            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
     }
 

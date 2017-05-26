@@ -24,7 +24,7 @@ export class ROService {
 
 
     mine(orcid: string): Promise<Array<any>> {
-      const url = `${this.roUrl}/mine?orcid=${orcid}`;
+      const url = `${this.roUrl}/${orcid}/mine`;
       return this.http.get(url)
         .toPromise()
         .then(response => response.json() as Array<any>)

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit } from '@angular/core'
+import { Router, ActivatedRoute, Params } from '@angular/router'
 import { AuthService } from '../shared/services/auth/auth.service'
 import { StorageService } from '../shared/services/storage/storage.service'
 
@@ -9,6 +9,7 @@ import { StorageService } from '../shared/services/storage/storage.service'
     styleUrls: ['./login.component.scss'],
     providers: [AuthService, StorageService]
 })
+
 export class LoginComponent implements OnInit {
 
 	user: Object;
