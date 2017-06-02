@@ -8,6 +8,8 @@ const routes: Routes = [
         children: [
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'github', loadChildren: './github/github.module#GithubModule' },
+            { path: 'slideshare', loadChildren: './slideshare/slideshare.module#SlideshareModule' },
+            { path: 'openaire', loadChildren: './openaire/openaire.module#OpenaireModule' },
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
             { path: 'forms', loadChildren: './form/form.module#FormModule' },

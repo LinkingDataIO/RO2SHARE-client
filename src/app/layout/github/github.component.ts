@@ -16,6 +16,7 @@ export class GithubComponent implements OnInit {
     public ros: Array<any> = [];
     public githubRepos: Object;
     public user: Object;
+    public searching: boolean = true;
 
     constructor(private roService: ROService,
         private storageService: StorageService,
@@ -36,9 +37,11 @@ export class GithubComponent implements OnInit {
                     this.githubRepos = repos;
                     this.storageService.write('githubRepos', this.githubRepos);
                     this.router.navigateByUrl('/github');
+                    this.searching = false;
                 });
             } else {
                 this.githubRepos = this.storageService.read<Array<any>>('githubRepos');
+                this.searching = false;
             }
           });
     }

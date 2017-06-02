@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartsModule as Ng2Charts } from 'ng2-charts';
 
-import { GithubRoutingModule } from './github-routing.module';
-import { GithubComponent } from './github.component';
+import { OpenaireRoutingModule } from './openaire-routing.module';
+import { OpenaireComponent } from './openaire.component';
 import { PageHeaderModule } from '../../shared';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,10 +11,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     imports: [
         CommonModule,
         Ng2Charts,
-        GithubRoutingModule,
+        OpenaireRoutingModule,
         PageHeaderModule,
         NgbModule.forRoot(),
     ],
-    declarations: [GithubComponent]
+    declarations: [OpenaireComponent]
 })
-export class GithubModule { }
+export class OpenaireModule { }

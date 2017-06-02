@@ -22,7 +22,8 @@ export class ModalComponent implements OnInit {
     public ros: Array<any> = [];
     public discos: Array<any> = [];
     public disco: Object = {description: '', ros: []};
-    public downloadUrl: string = "http://localhost:8080/disco/download?uri="
+    public downloadUrl: string = "http://localhost:8080/disco/download?uri=";
+    public edit: boolean = false;
     myOptions: IMultiSelectOption[];
     mySettings: IMultiSelectSettings = {
         enableSearch: true,
@@ -55,18 +56,36 @@ export class ModalComponent implements OnInit {
         });
     }
 
-    open(content) {
+    open(content, disco, edit) {
+        console.log(disco);
+        this.edit = edit;
+        this.disco['ros'] = disco['ros'];
+        this.disco['description'] = disco['description'];
+        this.disco['uri'] = disco['uri'];
         this.modalService.open(content).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
+            this.disco = {description: '', ros: []};
         }, (reason) => {
-            this.discoService.create(this.user['orcid'], reason).then(create => {
-                this.disco = {description: '', ros: []};
-                this.discoService.mine(this.user['orcid']).then(discos => {
-                    this.discos = discos;
-                    this.toastr.success('Disco created!', 'Success!', {toastLife: 3000, showCloseButton: false});
+            if(edit) {
+                this.discoService.update(this.user['orcid'], reason).then(update => {
+                    this.disco = {description: '', ros: []};
+                    this.discoService.mine(this.user['orcid']).then(discos => {
+                        this.discos = discos;
+                        this.toastr.success('Disco updated!', 'Success!', {toastLife: 3000, showCloseButton: false});
+                    });
+                    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
                 });
-                this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-            });
+
+            } else {
+                this.discoService.create(this.user['orcid'], reason).then(create => {
+                    this.disco = {description: '', ros: []};
+                    this.discoService.mine(this.user['orcid']).then(discos => {
+                        this.discos = discos;
+                        this.toastr.success('Disco created!', 'Success!', {toastLife: 3000, showCloseButton: false});
+                    });
+                    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+                });
+            }
         });
     }
 

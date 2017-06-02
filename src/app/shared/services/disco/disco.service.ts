@@ -24,6 +24,21 @@ export class DiSCOService {
     }
 
 
+    update(orcid: string, disco:Object): Promise<Object> {
+      disco['orcid'] = orcid;
+      
+      const url = `${this.discoUrl}/update`;
+      let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+
+      return this.http.post(url, JSON.stringify(disco), {headers: this.headers})
+        .toPromise()
+        .then(response => response.json() as Object)
+        .catch(this.handleError);
+    }
+
+
     mine(orcid: string): Promise<Array<any>> {
       const url = `${this.discoUrl}/mine?orcid=${orcid}`;
       return this.http.get(url)
