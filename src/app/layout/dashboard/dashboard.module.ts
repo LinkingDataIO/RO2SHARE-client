@@ -5,6 +5,7 @@ import {
     NgbAlertModule,
     NgbModule
 } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -24,6 +25,7 @@ import { StatModule } from '../../shared';
         NgbModule.forRoot(),
         DashboardRoutingModule,
         StatModule,
+        FormsModule,
     ],
     declarations: [
         DashboardComponent,
