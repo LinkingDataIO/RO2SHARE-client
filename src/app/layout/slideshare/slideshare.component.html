@@ -1,10 +1,12 @@
 <h2>My Presentations</h2>
 <hr />
-<div class="form-group input-group slideshare-search">
-    <span class="input-group-addon"><i class="fa fa-slideshare"></i></span>
-    <input type="text" class="form-control" placeholder="Slideshare Username" [(ngModel)]="slideshareUsername">
-    <span class="input-group-btn"><button class="btn btn-secondary" type="button" (click)="search(slideshareUsername)"><i class="fa fa-search"></i></button></span>
+<div class="slideshare-search">
+    <input type="text" class="form-control" placeholder="Slideshare username" [(ngModel)]="slideshareUsername">
+    <input type="password" class="form-control" placeholder="Slideshare password" [(ngModel)]="slidesharePassword">
+    <span class="input-group-btn"></span>
+    <button class="btn btn-primary" type="button" (click)="search(slideshareUsername, slidesharePassword)">Search&nbsp;<i class="fa fa-search"></i></button>
 </div>
+
 <hr [hidden]="slidesharePresentations?.length > 0"/>
 <p><ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true" [hidden]="slidesharePresentations?.length > 0 || !searching">Loading your Slideshare presentations</ngb-progressbar></p>
 <div class="row">

@@ -10,8 +10,8 @@ export class SlideshareService {
 
   constructor(private http: Http) { }
 
-  search(username: string, orcid:string): Promise<Object> {
-    const url = `${this.authUrl}/search?username=${username}&orcid=${orcid}`;
+  search(username: string, password: string, orcid:string): Promise<Object> {
+    const url = `${this.authUrl}/search?username=${username}&password=${password}&orcid=${orcid}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Object)

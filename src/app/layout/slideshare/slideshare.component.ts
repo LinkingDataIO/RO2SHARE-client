@@ -18,6 +18,7 @@ export class SlideshareComponent implements OnInit {
     public user: Object;
     public searching: boolean = true;
     public slideshareUsername: string = '';
+    public slidesharePassword: string = '';
 
     constructor(private roService: ROService,
         private storageService: StorageService,
@@ -32,16 +33,16 @@ export class SlideshareComponent implements OnInit {
     ngOnInit() {
         this.user = this.storageService.read<Object>('user');
         if (this.slideshareUsername !== '' && localStorage.getItem('slidesharePresentations') === null) {
-            this.search(this.slideshareUsername);
+            this.search(this.slideshareUsername, this.slidesharePassword);
         } else {
             this.slidesharePresentations = this.storageService.read<Array<any>>('slidesharePresentations');
             this.searching = false;
         }
     }
 
-    search(username: string){
+    search(username: string, password: string){
         this.slideshareUsername = username;
-        let presentations = this.slideshareService.search(this.slideshareUsername, this.user['orcid']).then(presentations => {
+        let presentations = this.slideshareService.search(this.slideshareUsername, this.slidesharePassword, this.user['orcid']).then(presentations => {
             this.slidesharePresentations = presentations;
             this.storageService.write('slidesharePresentations', this.slidesharePresentations);
             this.searching = false;
