@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   serviceUrl: 'http://localhost:8080',
-  clientId: 'APP-NNXW1QUFSJRHMC0C'
+  clientId: 'APP-NNXW1QUFSJRHMC0C',
+  githubClientId : '8e005f3d22143179bb76'
 };

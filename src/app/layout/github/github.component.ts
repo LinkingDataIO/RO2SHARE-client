@@ -4,6 +4,7 @@ import { GithubService } from '../../shared/services/github/github.service'
 import { ROService} from '../../shared/services/ro/ro.service'
 import { Router, ActivatedRoute, Params } from '@angular/router'
 import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr'
+import { environment } from '../../../environments/environment'
 
 @Component({
     selector: 'app-github',
@@ -17,6 +18,7 @@ export class GithubComponent implements OnInit {
     public githubRepos: Array<any>;
     public user: Object;
     public searching: boolean = true;
+    public githubURL = "https://github.com/login/oauth/authorize?scope=user:email&client_id=" + environment.githubClientId;
 
     constructor(private roService: ROService,
         private storageService: StorageService,
