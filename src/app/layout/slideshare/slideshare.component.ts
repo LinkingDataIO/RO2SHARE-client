@@ -14,7 +14,7 @@ import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr'
 
 export class SlideshareComponent implements OnInit {
     public ros: Array<any> = [];
-    public slidesharePresentations: Object;
+    public slidesharePresentations: Array<any>;
     public user: Object;
     public searching: boolean = true;
     public slideshareUsername: string = '';

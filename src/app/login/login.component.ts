@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute, Params } from '@angular/router'
 import { AuthService } from '../shared/services/auth/auth.service'
 import { StorageService } from '../shared/services/storage/storage.service'
-
+import { Location  } from '@angular/common';
+import { environment } from '../../environments/environment' 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     constructor(public router: Router,
     			private activatedRoute: ActivatedRoute,
     			private authService: AuthService,
-    			private storageService: StorageService) { }
+    			private storageService: StorageService,
+                private location: Location) { }
 
     ngOnInit() {
     	this.activatedRoute.queryParams.subscribe((params: Params) => {
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
     }
 
     onLoggedin() {
-    	var oauthWindow = window.open("https://orcid.org/oauth/authorize?client_id=APP-NNXW1QUFSJRHMC0C&response_type=code&scope=/authenticate&redirect_uri=http://localhost:4200/login", "_self", "toolbar=no, scrollbars=yes, width=500, height=600, top=500, left=500");
+    	var oauthWindow = window.open(`https://orcid.org/oauth/authorize?client_id=${environment.clientId}&response_type=code&scope=/authenticate&redirect_uri=${window.location.href}`, "_self", "toolbar=no, scrollbars=yes, width=500, height=600, top=500, left=500");
     }
 
 }

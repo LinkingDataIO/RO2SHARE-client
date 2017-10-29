@@ -14,7 +14,7 @@ import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr'
 
 export class GithubComponent implements OnInit {
     public ros: Array<any> = [];
-    public githubRepos: Object;
+    public githubRepos: Array<any>;
     public user: Object;
     public searching: boolean = true;
 

@@ -1,11 +1,12 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DiSCOService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private discoUrl = 'http://localhost:8080/disco';  // URL to web api
+    private discoUrl = `${environment.serviceUrl}/disco`;  // URL to web api
 
     constructor(private http: Http) { }
 

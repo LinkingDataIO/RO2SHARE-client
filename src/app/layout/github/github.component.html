@@ -1,6 +1,6 @@
 <h2>My Github Repos</h2>
 <hr />
-<a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=f65942a401e7a44881fd" class="btn btn-primary" (click)="open(content)" [hidden]="githubRepos?.length > 0"><i class="fa fa-github"></i>&nbsp;Connect to Gihub</a>
+<a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=8e005f3d22143179bb76" class="btn btn-primary" [hidden]="githubRepos?.length > 0"><i class="fa fa-github"></i>&nbsp;Connect to Gihub</a>
 <hr [hidden]="githubRepos?.length > 0"/>
 <p><ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true" [hidden]="githubRepos?.length > 0 || !searching">Loading your Github Repos</ngb-progressbar></p>
 <div class="row">

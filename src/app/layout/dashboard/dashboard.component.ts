@@ -13,7 +13,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap'
     providers: [SHAREService, StorageService, ROService,]
 })
 export class DashboardComponent implements OnInit {
-    public shareResults: Array<any> = [];
+    public shareResults: Array<Object> = [];
     public user: Object;
     public searching: boolean = true;
     public selectedResult: Object;

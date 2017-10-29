@@ -1,12 +1,13 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private authUrl = 'http://localhost:8080/auth';  // URL to web api
+  private authUrl = `${environment.serviceUrl}/auth`;  // URL to web api
 
   constructor(private http: Http) { }
 

@@ -7,6 +7,7 @@ import { IMultiSelectOption } from 'angular-2-dropdown-multiselect'
 import { IMultiSelectSettings } from 'angular-2-dropdown-multiselect'
 import { DiSCOService } from '../../../../shared/services/disco/disco.service'
 import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr'
+import { environment } from '../../../../../environments/environment';
 
 @Component({
     selector: 'app-modal',
@@ -22,7 +23,7 @@ export class ModalComponent implements OnInit {
     public ros: Array<any> = [];
     public discos: Array<any> = [];
     public disco: Object = {description: '', ros: []};
-    public downloadUrl: string = "http://localhost:8080/disco/download?uri=";
+    public downloadUrl: string = environment.serviceUrl + "/disco/download?uri=";
     public edit: boolean = false;
     myOptions: IMultiSelectOption[];
     mySettings: IMultiSelectSettings = {

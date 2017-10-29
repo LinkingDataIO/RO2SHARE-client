@@ -1,6 +1,6 @@
 <h2>OpenAIRE Search Results for your name</h2>
 <hr>
-<p><ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true" [hidden]="openAIREResults?.length > 0 || !searching">Loading OpenAIRE search results</ngb-progressbar></p>
+<p><ngb-progressbar type="info" [value]="100" [striped]="true" [animated]="true" [hidden]="(openAIREResults?.length > 0) || !searching">Loading OpenAIRE search results</ngb-progressbar></p>
 <div class="row">
     <div class="col-10" *ngFor="let result of openAIREResults">
         <div class="card mb-3">
@@ -11,8 +11,8 @@
             </div>
             <div  class="card-block">
               <small class="text-muted">{{result.type}}</small>
-              <p *ngIf="result.lists.publishers?.length > 0">Publisher: {{result.lists.publishers[0].name}}</p>
-              <p [hidden]="!result.lists.contributors?.length > 0">Contributors: <span *ngFor="let contributor of result.lists.contributors">{{contributor.name}}, </span></p>
+              <p *ngIf="(result.lists.publishers?.length > 0)">Publisher: {{result.lists.publishers[0].name}}</p>
+              <p [hidden]="!(result.lists.contributors?.length > 0)">Contributors: <span *ngFor="let contributor of result.lists.contributors">{{contributor.name}}, </span></p>
               <p [hidden]="!result.description">Description: {{result.description | slice:0:500}}</p>
               <p *ngFor="let link of result.identifiers"><a target="_blank" href="{{link}}">{{link}}</a></p>
             </div>

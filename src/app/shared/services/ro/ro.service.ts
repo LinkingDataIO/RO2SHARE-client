@@ -1,11 +1,12 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ROService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private roUrl = 'http://localhost:8080/ro';  // URL to web api
+    private roUrl = `${environment.serviceUrl}/ro`;  // URL to web api
 
     constructor(private http: Http) { }
 

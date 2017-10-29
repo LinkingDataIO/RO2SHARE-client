@@ -15,7 +15,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap'
 
 export class OpenaireComponent implements OnInit {
     public ros: Array<any> = [];
-    public openAIREResults: Object;
+    public openAIREResults: Array<any> = [];
     public user: Object;
     public searching: boolean = true;
     public selectedResult: Object;

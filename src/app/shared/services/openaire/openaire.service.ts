@@ -1,11 +1,12 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class OpenAIREService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private openaireUrl = 'http://localhost:8080/openaire';  // URL to web api
+    private openaireUrl = `${environment.serviceUrl}/openaire`;  // URL to web api
 
     constructor(private http: Http) { }
 
